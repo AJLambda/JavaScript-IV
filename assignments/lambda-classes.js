@@ -11,14 +11,14 @@ class Person {
     }
     //Person methods
     speak() {
-        return `Hello my name is ${this.name}, I am from ${this.location}`;
+        console.log (`Hello my name is ${this.name}, I am from ${this.location}`);
     }
 }
 
 //Instructor class
-class Instructor extends Person {   
+class Instructor extends Person {       //Instructors need to be extensions of Person. __proto__
     constructor(instructorAttributes) {
-        super(instructorAttributes);
+        super(instructorAttributes);        //Instructor uses the same attributes and methods that have been set up by Person
         this.specialty = instructorAttributes.specialty;
         this.favLanguage = instructorAttributes.favLanguage;
         this.catchPhrase = instructorAttributes.catchPhrase;
@@ -33,29 +33,29 @@ class Instructor extends Person {
 }
 
 //Student class
-class Student extends Person {
+class Student extends Person {      //Students need to be extentions of Person. __proto__
     constructor(studentAttributes) {
-        super(studentAttributes);
+        super(studentAttributes);       //Student uses the same attributes and methods that have been set up by Person
         this.previousBackground = studentAttributes.previousBackground;
         this.className = studentAttributes.className;
         this.favSubjects = studentAttributes.favSubjects;
     }
     //Student methods
     listsSubjects() {
-        console.log (this.map());
+        console.log (this.favSubjects.toString());
     }
-    PRAssigment(subject) {
-        console.log (`${student.name} has submitted a PR for ${subject}`)
+    PRAssignment(subject) {
+        console.log (`${this.name} has submitted a PR for ${subject}`)
     }
     sprintChallenge(subject) {
-        console.log (`${student.name} has begun sprint challenge on ${subject}`)
+        console.log (`${this.name} has begun sprint challenge on ${subject}`)
     }
 }
 
 //Project Manager class
-class ProjectManager extends Instructor {
+class ProjectManager extends Instructor {       //Project Managers need to be extensions of Instructor. __proto__
     constructor(projectManagerAttributes) {
-        super(projectManagerAttributes);
+        super(projectManagerAttributes);         //Project Managers use the same attributes and methods that have been set up by Instructor
         this.gradClassName = projectManagerAttributes.gradClassName;
         this.favInstructor = projectManagerAttributes.favInstructor;
     }
@@ -63,12 +63,12 @@ class ProjectManager extends Instructor {
     standUp(channel) {
         console.log (`${this.name} announces to ${channel}, @ channel standy times!`);
     }
-    debugsCode(student) {
-        console.log (`${this.name} debugs ${student.name}'s code on ${this.subject}`)
+    debugsCode(student, subject) {
+        console.log (`${this.name} debugs ${student.name}'s code on ${subject}`)
     }
 }
 
-//OBJECTS///////////////////////////////////////////////////////////////////////////////////////////////
+//OBJECTS//////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 //Person Objects
 const bill = new Person({
@@ -89,7 +89,7 @@ const bob = new Person({
 const josh = new Instructor({
     name: 'Josh',
     age: 21,
-    location: 'online',
+    location: 'Zoomville',
     gender: 'M',
     speciality: 'front-end',
     favLanguage: 'Javascript',
@@ -99,7 +99,7 @@ const josh = new Instructor({
 const janice = new Instructor({
     name: 'Janice',
     age: 32,
-    location: 'online',
+    location: 'Zoomville',
     gender: 'F',
     speciality: 'back-end',
     favLanguage: 'Python',
@@ -117,23 +117,23 @@ const austin = new Student({
     favSubjects: ['HTML', 'CSS', 'JavaScript'],
 });
 
-const jason = new Student({
+const ashley = new Student({
     name: 'Ashley',
     age: 24,
-    location: 'Nashville',
+    location: 'Kentucky',
     gender: 'F',
     previousBackground: 'Codecademy',
     className: 'Web 18',
-    favSubjects: ['HTML', 'CSS', 'JavaScript'],
+    favSubjects: ['C++', 'Python', 'JavaScript'],
 });
 
 //Project Manager Objects
 const nick = new ProjectManager({
     name: 'Nick',
     age: 28,
-    location: 'online',
+    location: 'SlackTown',
     gender: 'M',
-    speciality: 'Managing',
+    specialty: 'Managing',
     favLanguage: 'Javascript',
     catchPhrase: 'Lemme see that pull request',
     gradClassName: 'Web1',
@@ -143,11 +143,55 @@ const nick = new ProjectManager({
 const jeremy = new ProjectManager({
     name: 'Jeremy',
     age: 32,
-    location: 'online',
+    location: 'SlackTown',
     gender: 'M',
-    speciality: 'Managing',
+    specialty: 'Managing',
     favLanguage: 'HTML',
     catchPhrase: 'Lemme see that pull request',
     gradClassName: 'Web2',
     favInstructor: 'Josh',
 });
+
+//Call speak method on each Person, individually
+bill.speak();
+bob.speak();
+josh.speak();
+janice.speak();
+austin.speak();
+ashley.speak();
+nick.speak();
+jeremy.speak();
+
+//Call demo method for each Instructor, individually
+josh.demo('JavaScript IV');  //Passes subject string as argument
+janice.demo('JavaScript III'); //Passes subject string as argument
+
+//Call grade method for each Instructor, individually
+josh.grade(austin, 'JavaScript IV'); //Passes student object and a subject string as arguments
+janice.grade(ashley, 'JavaScript III'); //Passes student object and a subject string as arguments
+
+//Call listsSubjects method for each Student, individually
+austin.listsSubjects();
+ashley.listsSubjects();
+
+//Call PRAssignment method for each Student, individually
+austin.PRAssignment('JavaScript IV');
+ashley.PRAssignment('JavaScript III');
+
+//Call sprintChallenge method for each Student, individually
+austin.sprintChallenge('JavaScript IV');
+ashley.sprintChallenge('JavaScript III');
+
+//Call standUp method for each Project Manager, individually
+nick.standUp('Web18_Help');
+jeremy.standUp('Web18_Help');
+
+//Call debugsCode method for each Project Manager, individually
+nick.debugsCode(austin, 'JavaScript IV');
+jeremy.debugsCode(ashley, 'JavaScript III');
+
+
+
+
+
+
